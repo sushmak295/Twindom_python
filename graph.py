@@ -2,32 +2,30 @@
 A simple Python graph class, demonstrating the essential 
 facts and functionalities of graphs.
 """
-
-
-class Graph(object):
+class Graph_class(object):
 
     def __init__(self, graph_dict=None):
         """ initializes a graph object """           
         
         if graph_dict == None:
             graph_dict = {}
-        self.__graph_dict = graph_dict
+        self.graph_dict = graph_dict
 
     def vertices(self):
         """ returns the vertices of a graph """
-        return list(self.__graph_dict.keys())
+        return list(self.graph_dict.keys())
 
     def edges(self):
         """ returns the edges of a graph """
-        return self.__generate_edges()
+        return self.generate_edges()
 
     def add_vertex(self, vertex):
         """ If the vertex "vertex" is not in 
-            self.__graph_dict, a key "vertex" with an empty
+            self.graph_dict, a key "vertex" with an empty
             list as a value is added to the dictionary.   
         """
-        if vertex not in self.__graph_dict:
-            self.__graph_dict[vertex] = []
+        if vertex not in self.graph_dict:
+            self.graph_dict[vertex] = []
 
     def add_edge(self, edge):
         """ assumes that edge is of type set, tuple or list; 
@@ -35,20 +33,20 @@ class Graph(object):
         """
         edge = set(edge)
         (vertex1, vertex2) = tuple(edge)
-        if vertex1 in self.__graph_dict:
-            self.__graph_dict[vertex1].append(vertex2)
+        if vertex1 in self.graph_dict:
+            self.graph_dict[vertex1].append(vertex2)
         else:
-            self.__graph_dict[vertex1] = [vertex2]
+            self.graph_dict[vertex1] = [vertex2]
 
-    def __generate_edges(self):
+    def generate_edges(self):
         """ A static method generating the edges of the 
             graph "graph". Edges are represented as sets 
             with one (a loop back to the vertex) or two 
             vertices 
         """
         edges = []
-        for vertex in self.__graph_dict:
-            for neighbour in self.__graph_dict[vertex]:
+        for vertex in self.graph_dict:
+            for neighbour in self.graph_dict[vertex]:
                 if {neighbour, vertex} not in edges:
                     edges.append({vertex, neighbour})
         return edges
@@ -67,7 +65,7 @@ if __name__ == "__main__":
         }
 
 
-    graph = Graph(g)
+    graph = Graph_class(g)
 
     print("Vertices of graph:")
     print(graph.vertices())
@@ -92,7 +90,5 @@ if __name__ == "__main__":
 
     print('Adding an edge {"x","y"} with new vertices:')
     graph.add_edge({"x","y"})
-    print("Vertices of graph:")
-    print(graph.vertices())
     print("Edges of graph:")
     print(graph.edges())
